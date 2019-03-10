@@ -7,15 +7,9 @@ class Billete{
 	}
 
 	mostrarBilletes(){
-			for (var i = 1; i <= this.cantidad; i++) {
-				//bi.mostrarBilletes();
-				/*var x = document.createElement("IMG");
-				x.setAttribute("id", "imagen");
-				x.setAttribute("src", imagenes[this.valor]);
-				document.body.appendChild(x);*/
-				
-				resultado.innerHTML += "<img src='"+this.imagen.src+"' />";
-			}
+		for (var i = 1; i <= this.cantidad; i++) {
+			resultado.innerHTML += "<img src='"+this.imagen.src+"' />";
+		}
 	}
 }
 
@@ -27,10 +21,8 @@ function mostrarError(dinero){
 
 function contandoBilletes(dinero){
 	for(var bi of caja){
-		//console.log(bi);
 		if(dinero > 0){
 			div = Math.floor(dinero / bi.valor);
-			//console.log(div);
 			if(div > bi.cantidad){
 				papeles = bi.cantidad;
 			}
@@ -39,38 +31,23 @@ function contandoBilletes(dinero){
 			}
 			entregado.push (new Billete(bi.valor, papeles));
 			dinero = dinero - (bi.valor * papeles);
-			//dinero -= (bi.valor * papeles);
 		}
 		bi.cantidad -= papeles;
-		//console.log(bi.cantidad);
-		//console.log(bi);
 	}
 }
 
 function mostrandoBilletes(){
 	resultado.innerHTML = "Tome su dinero.<br/>";
-			for(var e of entregado){
-				if(e.cantidad > 0){
-					e.mostrarBilletes();
-					//document.write(e.cantidad + " billetes de " + e.valor + "<br />");
-					//lista = lista + e.cantidad + " billetes de $" + e.valor + "<br />";
-					//resultado.innerHTML = resultado.innerHTML + e.cantidad + " billetes de $" + e.valor + "<br />";
-					//resultado.innerHTML += e.cantidad + " billetes de $" + e.valor + "<br />"; //la variable es igual a su valor mas lo que haya despues del operador
-					/*for (var i = 1; i <= e.cantidad; i++) {
-						//bi.mostrarBilletes();
-						var x = document.createElement("IMG");
-						x.setAttribute("src", "b"+e.valor+".png");
-						lista = lista + document.body.appendChild(x);
-					}*/
-					
-				}
-			}
+	for(var e of entregado){
+		if(e.cantidad > 0){
+			e.mostrarBilletes();
+		}
+	}
 }
 
 function actualizarCapital(dinero){
 	capital -= dinero;
-
-		saldo.innerHTML = "Se cuenta con $" + capital + " pesos.";
+	saldo.innerHTML = "Se cuenta con $" + capital + " pesos.";
 }
 
 function entregarDinero(){
@@ -82,28 +59,10 @@ function entregarDinero(){
 		mostrarError(dinero);
 	}
 	else{
-
 		actualizarCapital(dinero);
-
 		contandoBilletes(dinero);
-
-		/*if(dinero > 0 && dinero > capital){
-			//console.log("Soy un cajero pobre y no tengo dinero");
-			//document.write("Soy un cajero pobre y no tengo dinero");
-			resultado.innerHTML = "Soy un cajero malo, he sido malo y no puedo darte esa cantidad";
-		}
-		else{*/
-			//console.log(entregado);
-
-			mostrandoBilletes();
-			
-			console.log(entregado);
-			entregado = [];
-			//resultado.innerHTML = lista;
-		//}
-
-		console.log(capital);
-		console.log(caja);
+		mostrandoBilletes();
+		entregado = [];
 	}
 }
 
@@ -133,9 +92,9 @@ function muestraCaja(){
 	caja.push(new Billete(1000, 100));
 	caja.push(new Billete(500, 100));
 	caja.push(new Billete(200, 100));
-	caja.push(new Billete(100, 100)); //125
+	caja.push(new Billete(100, 100));
 	caja.push(new Billete(50, 100));
-	caja.push(new Billete(20, 100)); //30
+	caja.push(new Billete(20, 100));
 	caja.push(new Billete(10, 100));
 	caja.push(new Billete(5, 100));	
 	caja.push(new Billete(2, 100));	
@@ -145,7 +104,7 @@ function muestraCaja(){
 var caja = [];
 var entregado = [];
 
-var dinero = 0;//210 //1000
+var dinero = 0;
 var div = 0;
 var papeles = 0;
 
@@ -158,9 +117,5 @@ var capital = 0;
 muestraCaja();
 
 muestraCapital();
-
-console.log(capital);
-
-console.log(caja);
 
 b.addEventListener("click", entregarDinero);
